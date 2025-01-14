@@ -2,6 +2,7 @@ const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const resolutionSlider = document.getElementById('resolution');
+const upload = document.getElementById('upload');
 
 const chars = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", "."];
 
@@ -42,4 +43,14 @@ video.addEventListener('play', () => {
 
 resolutionSlider.addEventListener('input', (event) => {
     resolution = parseInt(event.target.value);
+});
+
+upload.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const url = URL.createObjectURL(file);
+        video.src = url;
+        video.load();
+        video.play();
+    }
 });
